@@ -1,32 +1,20 @@
 #![allow(dead_code, unused_variables)]
 
-pub struct Credentials {
-    username: String,
-    password: String,
-}
+use rand::prelude::*;
 
-pub enum Status {
-    Connected,
-    Interrupted,
-}
+mod auth_utils;
+mod database;
 
-fn connect_to_database() -> Status {
-    return Status::Connected;
-}
+use database::*;
 
-fn login(creds: Credentials) {
-    println!("Logging in with username: {}", creds.username);
-}
-
-fn logout() {
-    println!("Logging out");
-}
-
-fn get_user() {}
+pub use auth_utils::models::Credentials;
 
 pub fn authenticate(creds: Credentials) {
+    let backoff = thread_rng().gen_range(100..500);
+    println!("the backoff time is {backoff} ms");
+
     if let Status::Connected = connect_to_database() {
-        login(creds)
+        auth_utils::login(creds)
     } else {
         println!("Could not connect to database");
     }
