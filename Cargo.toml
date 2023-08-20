@@ -1,6 +1,6 @@
 [package]
-name = "auth_service"
-version = "0.1.0"
+name = "gcc_lgr_auth_service"
+version = "0.1.1"
 edition = "2021"
 
 description = "Auth service lgr bootcamp learning project"
